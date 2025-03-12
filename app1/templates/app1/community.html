@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Community Forum</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
+  <body class="flex flex-col min-h-screen bg-gray-100">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md sticky top-0 w-full z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+          <div class="flex items-center">
+          <a href="/" class="text-2xl font-bold text-gray-800">Adenocare</a>
+          </div>
+          <div class="flex-1 flex justify-center items-center"></div>
+          <div class="flex items-center space-x-4">
+            <a
+            href="{% url 'index' %}"
+            class="text-gray-800 hover:text-blue-500"
+            >Home</a
+            >
+            <a
+            href="{% url 'auth' %}"
+            class="text-gray-800 hover:text-blue-500"
+            >Login</a
+            >
+            <a
+            href="{% url 'community' %}"
+            class="text-gray-800 hover:text-blue-500"
+            >Community</a
+            >
+            <a
+            href="{% url 'lung_analysis' %}"
+            class="text-gray-800 hover:text-blue-500"
+            >Lung Analysis</a
+            >
+            <a
+            href="{% url 'symptom_checker' %}"
+            class="text-gray-800 hover:text-blue-500"
+            >Symptom Checker</a
+            >
+          </div>
+          </div>
+        </div>
+        </div>
+      </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+      <div class="max-w-6xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
+        <div
+          class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-4 md:space-y-0 mb-8"
+        >
+          <div>
+            <h1 class="text-4xl font-bold tracking-tight text-gray-900 mb-2">
+              Community Forum
+            </h1>
+            <p class="text-xl text-gray-600">
+              Connect with others, share experiences, and find support
+            </p>
+          </div>
+          <button
+            class="flex items-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+          >
+            <i data-lucide="plus-circle" class="mr-2 h-4 w-4"></i>
+            New Post
+          </button>
+        </div>
+
+        <!-- Tabs -->
+        <div class="mb-6">
+          <div class="flex space-x-2">
+            <button
+              class="px-4 py-2 bg-white rounded-md text-gray-700 hover:bg-gray-100"
+            >
+              Recent Posts
+            </button>
+            <button
+              class="px-4 py-2 bg-white rounded-md text-gray-700 hover:bg-gray-100"
+            >
+              Popular Posts
+            </button>
+            <button
+              class="px-4 py-2 bg-white rounded-md text-gray-700 hover:bg-gray-100"
+            >
+              My Posts
+            </button>
+          </div>
+        </div>
+
+        <!-- Posts -->
+        <div class="grid grid-cols-1 gap-6">
+          <!-- Post 1 -->
+          <div class="bg-white shadow rounded-lg overflow-hidden">
+            <div class="px-6 py-4">
+              <h2 class="text-xl font-bold text-gray-900">
+                My journey with lung cancer treatment
+              </h2>
+              <p class="text-sm text-gray-600 flex items-center">
+                <i data-lucide="user" class="h-3 w-3 mr-1"></i>
+                Jane Doe
+                <span class="mx-2">•</span>
+                <i data-lucide="clock" class="h-3 w-3 mr-1"></i>
+                5 days ago
+              </p>
+            </div>
+            <div class="px-6 py-4">
+              <p class="whitespace-pre-wrap">
+                I was diagnosed with stage 2 lung cancer last year. After six
+                months of treatment, I want to share my experience and how I
+                stayed positive throughout the process.
+              </p>
+            </div>
+            <div class="px-6 py-4 flex flex-col space-y-4">
+              <div class="flex items-center space-x-4">
+                <button
+                  class="flex items-center space-x-1 text-gray-600 hover:text-gray-900"
+                >
+                  <i data-lucide="heart" class="h-4 w-4"></i>
+                  <span>24</span>
+                </button>
+                <button
+                  class="flex items-center space-x-1 text-gray-600 hover:text-gray-900"
+                >
+                  <i data-lucide="message-square" class="h-4 w-4"></i>
+                  <span>1</span>
+                </button>
+              </div>
+
+              <!-- Comments -->
+              <div class="w-full">
+                <hr class="my-4" />
+                <h4 class="font-medium mb-4">Comments</h4>
+                <div class="space-y-4">
+                  <div class="bg-gray-50 rounded-lg p-3">
+                    <div class="flex items-center justify-between mb-2">
+                      <span class="text-sm font-medium">John Smith</span>
+                      <span class="text-xs text-gray-500">4 days ago</span>
+                    </div>
+                    <p class="text-sm">
+                      Thank you for sharing your story. It really helps to hear
+                      from someone who has gone through it.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Comment Input -->
+              <div class="w-full space-y-2 mt-4">
+                <textarea
+                  placeholder="Write a comment..."
+                  rows="3"
+                  class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
+                ></textarea>
+                <div class="flex justify-end">
+                  <button
+                    class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+                  >
+                    Post Comment
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Post 2 -->
+          <div class="bg-white shadow rounded-lg overflow-hidden">
+            <div class="px-6 py-4">
+              <h2 class="text-xl font-bold text-gray-900">
+                New clinical trial for immunotherapy
+              </h2>
+              <p class="text-sm text-gray-600 flex items-center">
+                <i data-lucide="user" class="h-3 w-3 mr-1"></i>
+                Robert Johnson
+                <span class="mx-2">•</span>
+                <i data-lucide="clock" class="h-3 w-3 mr-1"></i>
+                2 days ago
+              </p>
+            </div>
+            <div class="px-6 py-4">
+              <p class="whitespace-pre-wrap">
+                I recently enrolled in a clinical trial for a new immunotherapy
+                treatment. If anyone is interested in learning more about
+                eligibility requirements, feel free to ask questions.
+              </p>
+            </div>
+            <div class="px-6 py-4 flex flex-col space-y-4">
+              <div class="flex items-center space-x-4">
+                <button
+                  class="flex items-center space-x-1 text-gray-600 hover:text-gray-900"
+                >
+                  <i data-lucide="heart" class="h-4 w-4"></i>
+                  <span>18</span>
+                </button>
+                <button
+                  class="flex items-center space-x-1 text-gray-600 hover:text-gray-900"
+                >
+                  <i data-lucide="message-square" class="h-4 w-4"></i>
+                  <span>0</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Community Guidelines -->
+        <div class="mt-8 bg-gray-50 p-6 rounded-lg">
+          <div class="text-center">
+            <h3 class="text-lg font-medium mb-2">Community Guidelines</h3>
+            <p class="text-gray-600 mb-4">
+              Please be respectful, supportive, and mindful that medical advice
+              should come from professionals.
+            </p>
+            <button
+              class="bg-white text-blue-600 px-4 py-2 rounded-md hover:bg-gray-100"
+            >
+              Back to Top
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white shadow">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <p class="text-center text-gray-600">
+          © 2023 Your Company. All rights reserved.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      lucide.createIcons();
+    </script>
+  </body>
+</html>
