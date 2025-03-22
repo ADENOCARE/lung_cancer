@@ -17,36 +17,16 @@
     <!-- Navbar -->
     <nav class="bg-white shadow-md sticky top-0 w-full z-10">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between h-16">
-        <div class="flex items-center">
-        <a href="/" class="text-2xl font-bold text-gray-800">AdenoClassify</a>
+        <div class="flex justify-between h-16">
+          <div class="flex items-center">
+            <a href="/" class="text-2xl font-bold text-gray-800">AdenoClassify</a>
+          </div>
+          <div class="flex items-center space-x-4">
+            <a href="/" class="text-gray-800 hover:text-blue-500">Home</a>
+            <a href="#" class="text-gray-800 hover:text-blue-500">Community</a>
+            <a href="#" class="text-gray-800 hover:text-blue-500">Symptom Checker</a>
+          </div>
         </div>
-        <div class="flex-1 flex justify-center items-center"></div>
-        <div class="flex items-center space-x-4">
-          <a
-          href="{% url 'index' %}"
-          class="text-gray-800 hover:text-blue-500"
-          >Home</a
-          >
-         
-          <a
-          href="{% url 'community' %}"
-          class="text-gray-800 hover:text-blue-500"
-          >Community</a
-          >
-          <a
-          href="{% url 'lung_analysis' %}"
-          class="text-gray-800 hover:text-blue-500"
-          >Lung Analysis</a
-          >
-          <a
-          href="{% url 'symptom_checker' %}"
-          class="text-gray-800 hover:text-blue-500"
-          >Symptom Checker</a
-          >
-        </div>
-        </div>
-      </div>
       </div>
     </nav>
 
@@ -54,210 +34,45 @@
     <main class="flex-grow">
       <div class="max-w-6xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
-          <h1
-            class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl mb-4"
-          >
+          <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl mb-4">
             Lung Cancer Analysis
           </h1>
           <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-            Upload a chest X-ray image and our AI will analyze it for potential
-            signs of lung cancer with high accuracy.
+            Upload a chest X-ray image and our AI will analyze it for potential signs of lung cancer with high accuracy.
           </p>
         </div>
 
-        <!-- Upload and Results Section -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-          <!-- Upload Card -->
-          <div class="bg-white shadow-md rounded-lg">
-            <div class="p-6 border-b border-gray-200">
-              <h2 class="text-xl font-bold">Upload X-ray Image</h2>
-            </div>
-            <div class="p-6">
-              <div
-                class="flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-lg p-12 text-center"
-              >
-                <div id="preview-container" class="relative w-full hidden">
-                  <img
-                    id="preview-image"
-                    src=""
-                    alt="X-ray preview"
-                    class="w-full h-auto rounded-lg"
-                  />
-                  <button
-                    id="clear-preview"
-                    class="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600"
-                  >
-                    ✕
-                  </button>
-                </div>
-                <div id="upload-prompt" class="space-y-4">
-                  <div class="mx-auto bg-blue-100 p-4 rounded-full">
-                    <i
-                      data-feather="upload"
-                      class="h-10 w-10 text-blue-500"
-                    ></i>
-                  </div>
-                  <div>
-                    <p class="text-sm text-gray-600">
-                      Drag and drop your chest X-ray image, or click to browse
-                    </p>
-                    <p class="text-xs text-gray-500 mt-2">
-                      Supported formats: JPEG, PNG. Max size: 5MB
-                    </p>
-                  </div>
-                  <input
-                    type="file"
-                    class="sr-only"
-                    id="x-ray-upload"
-                    accept="image/*"
-                  />
-                  <label for="x-ray-upload" class="block">
-                    <button
-                      class="bg-white border border-gray-300 px-4 py-2 rounded-md hover:bg-gray-50"
-                    >
-                      Select image
-                    </button>
-                  </label>
-                </div>
-              </div>
-              <button
-                id="analyze-button"
-                class="w-full mt-6 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 disabled:bg-blue-300 disabled:cursor-not-allowed"
-                disabled
-              >
-                Analyze X-ray
-              </button>
-            </div>
+        <!-- Upload Section -->
+        <form method="POST" enctype="multipart/form-data" class="space-y-4">
+          {% csrf_token %}
+          <div class="bg-white shadow-md rounded-lg p-6">
+            <h2 class="text-xl font-bold mb-4">Upload X-ray Image</h2>
+            <input
+              type="file"
+              name="xray"
+              accept="image/*"
+              class="block w-full text-sm text-gray-600"
+              required/>
+            <button type="submit" class="w-full mt-6 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+              Analyze X-ray
+            </button>
           </div>
+        </form>
 
-          <!-- Results Card -->
-          <div class="bg-white shadow-md rounded-lg">
-            <div class="p-6 border-b border-gray-200">
-              <h2 class="text-xl font-bold">Analysis Results</h2>
-            </div>
-            <div class="p-6">
-              <div
-                id="results-placeholder"
-                class="h-full flex items-center justify-center text-center p-12"
-              >
-                <div class="space-y-4">
-                  <p class="text-gray-600">
-                    Upload an X-ray image and click "Analyze X-ray" to get
-                    results.
-                  </p>
-                  <p class="text-xs text-gray-500">
-                    Our AI model is trained on thousands of lung X-ray images to
-                    detect potential signs of cancer with high accuracy.
-                  </p>
-                </div>
-              </div>
-              <div id="results-content" class="space-y-6 hidden">
-                <div class="flex items-center justify-center">
-                  <div id="result-icon" class="bg-green-100 p-4 rounded-full">
-                    <i
-                      data-feather="check"
-                      class="h-10 w-10 text-green-600"
-                    ></i>
-                  </div>
-                </div>
-                <div class="text-center">
-                  <h3 id="result-status" class="text-xl font-bold mb-2">
-                    No Cancer Detected
-                  </h3>
-                  <p id="result-confidence" class="text-gray-600">
-                    Confidence: 96.0%
-                  </p>
-                </div>
-                <div class="border-t border-gray-200 pt-4">
-                  <h4 class="font-medium mb-2">Recommendation:</h4>
-                  <p id="result-recommendation" class="text-gray-600">
-                    No signs of lung cancer detected. Continue regular check-ups
-                    as recommended by your healthcare provider.
-                  </p>
-                </div>
-                <div class="border-t border-gray-200 pt-4">
-                  <h4 class="font-medium mb-2">Next Steps:</h4>
-                  <ul
-                    id="result-next-steps"
-                    class="list-disc list-inside text-gray-600 space-y-1"
-                  >
-                    <li>Continue routine health check-ups</li>
-                    <li>Maintain a healthy lifestyle</li>
-                    <li>If you experience any symptoms, consult your doctor</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
+        <!-- Results Section -->
+        {% if analysis_result %}
+        <div class="bg-white shadow-md rounded-lg p-6 mt-8">
+          <h2 class="text-xl font-bold mb-4">Analysis Results</h2>
+          <p class="text-gray-600">{{ analysis_result }}</p>
         </div>
-
-        <!-- Info Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-          <div class="bg-white shadow-md rounded-lg">
-            <div class="p-6 border-b border-gray-200">
-              <h2 class="text-xl font-bold">Advanced AI Technology</h2>
-            </div>
-            <div class="p-6">
-              <p class="text-gray-600">
-                Our deep learning model has been trained on over 100,000 medical
-                images and achieves an accuracy rate of 94% in detecting lung
-                abnormalities.
-              </p>
-            </div>
-          </div>
-          <div class="bg-white shadow-md rounded-lg">
-            <div class="p-6 border-b border-gray-200">
-              <h2 class="text-xl font-bold">Early Detection</h2>
-            </div>
-            <div class="p-6">
-              <p class="text-gray-600">
-                Lung cancer is most treatable when caught early. Our AI can
-                detect subtle signs that might be missed in routine screenings.
-              </p>
-            </div>
-          </div>
-          <div class="bg-white shadow-md rounded-lg">
-            <div class="p-6 border-b border-gray-200">
-              <h2 class="text-xl font-bold">Consultation</h2>
-            </div>
-            <div class="p-6">
-              <p class="text-gray-600">
-                Connect with specialized oncologists who can review your results
-                and provide expert guidance on next steps.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Disclaimer -->
-        <div class="mt-12 bg-gray-100 p-6 rounded-lg">
-          <div class="text-center max-w-3xl mx-auto">
-            <h3 class="text-lg font-medium mb-2">Important Disclaimer</h3>
-            <p class="text-sm text-gray-600">
-              This tool is designed to assist in early detection but is not a
-              replacement for professional medical diagnosis. Always consult
-              with a healthcare professional for proper medical advice and
-              diagnosis.
-            </p>
-          </div>
-        </div>
+        {% endif %}
       </div>
     </main>
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-8">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center">
-          <p class="text-sm">© 2023 MediScan. All rights reserved.</p>
-          <div class="flex space-x-4">
-            <a href="/privacy" class="text-sm hover:text-gray-400"
-              >Privacy Policy</a
-            >
-            <a href="/terms" class="text-sm hover:text-gray-400"
-              >Terms of Service</a
-            >
-          </div>
-        </div>
+        <p class="text-sm">© 2023 MediScan. All rights reserved.</p>
       </div>
     </footer>
 
