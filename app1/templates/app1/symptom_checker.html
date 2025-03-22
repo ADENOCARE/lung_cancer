@@ -73,116 +73,103 @@
             </p>
           </div>
           <div class="px-6 py-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div class="flex items-center space-x-2">
-                <input
+            <form method="POST" class="space-y-4">
+              {% csrf_token %}
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    name="symptoms"
+                    value="Cough"
+                    id="cough"
+                    class="form-checkbox h-4 w-4 text-blue-600"
+                  />
+                  <label for="cough" class="flex items-center cursor-pointer">
+                    <i data-lucide="alert-circle" class="h-4 w-4 mr-2"></i>
+                    Cough
+                  </label>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    name="symptoms"
+                    value="Fever"
+                    id="fever"
+                    class="form-checkbox h-4 w-4 text-blue-600"
+                  />
+                  <label for="fever" class="flex items-center cursor-pointer">
+                    <i data-lucide="thermometer" class="h-4 w-4 mr-2"></i>
+                    Fever
+                  </label>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <input
                   type="checkbox"
-                  id="cough"
+                  name="symptoms"
+                  value="Shortness of Breath"
+                  id="shortness_of_breath"
                   class="form-checkbox h-4 w-4 text-blue-600"
-                />
-                <label for="cough" class="flex items-center cursor-pointer">
-                  <i data-lucide="alert-circle" class="h-4 w-4 mr-2"></i>
-                  Cough
-                </label>
-              </div>
-              <div class="flex items-center space-x-2">
-                <input
+                  />
+                  <label for="shortness_of_breath" class="flex items-center cursor-pointer">
+                  <i data-lucide="wind" class="h-4 w-4 mr-2"></i>
+                  Shortness of Breath
+                  </label>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <input
                   type="checkbox"
-                  id="fever"
+                  name="symptoms"
+                  value="Chest Pain"
+                  id="chest_pain"
                   class="form-checkbox h-4 w-4 text-blue-600"
-                />
-                <label for="fever" class="flex items-center cursor-pointer">
-                  <i data-lucide="thermometer" class="h-4 w-4 mr-2"></i>
-                  Fever
-                </label>
-              </div>
-              <!-- Add more symptoms here -->
-              <div class="flex items-center space-x-2">
-                <input
+                  />
+                  <label for="chest_pain" class="flex items-center cursor-pointer">
+                  <i data-lucide="heart" class="h-4 w-4 mr-2"></i>
+                  Chest Pain
+                  </label>
+                </div>
+          
+
+              
+
+                <div class="flex items-center space-x-2">
+                  <input
                   type="checkbox"
-                  id="fever"
+                  name="symptoms"
+                  value="Fatigue"
+                  id="fatigue"
                   class="form-checkbox h-4 w-4 text-blue-600"
-                />
-                <label for="fever" class="flex items-center cursor-pointer">
-                  <i data-lucide="thermometer" class="h-4 w-4 mr-2"></i>
-                  Fever
-                </label>
+                  />
+                  <label for="fatigue" class="flex items-center cursor-pointer">
+                  <i data-lucide="battery" class="h-4 w-4 mr-2"></i>
+                  Fatigue
+                  </label>
+                </div>
               </div>
-              <div class="flex items-center space-x-2">
-                <input
-                  type="checkbox"
-                  id="fever"
-                  class="form-checkbox h-4 w-4 text-blue-600"
-                />
-                <label for="fever" class="flex items-center cursor-pointer">
-                  <i data-lucide="thermometer" class="h-4 w-4 mr-2"></i>
-                  Fever
-                </label>
-              </div>
-              <div class="flex items-center space-x-2">
-                <input
-                  type="checkbox"
-                  id="fever"
-                  class="form-checkbox h-4 w-4 text-blue-600"
-                />
-                <label for="fever" class="flex items-center cursor-pointer">
-                  <i data-lucide="thermometer" class="h-4 w-4 mr-2"></i>
-                  Fever
-                </label>
-              </div>
-              <div class="flex items-center space-x-2">
-                <input
-                  type="checkbox"
-                  id="fever"
-                  class="form-checkbox h-4 w-4 text-blue-600"
-                />
-                <label for="fever" class="flex items-center cursor-pointer">
-                  <i data-lucide="thermometer" class="h-4 w-4 mr-2"></i>
-                  Fever
-                </label>
-              </div>
-              <div class="flex items-center space-x-2">
-                <input
-                  type="checkbox"
-                  id="fever"
-                  class="form-checkbox h-4 w-4 text-blue-600"
-                />
-                <label for="fever" class="flex items-center cursor-pointer">
-                  <i data-lucide="thermometer" class="h-4 w-4 mr-2"></i>
-                  Fever
-                </label>
-              </div>
-              <div class="flex items-center space-x-2">
-                <input
-                  type="checkbox"
-                  id="fever"
-                  class="form-checkbox h-4 w-4 text-blue-600"
-                />
-                <label for="fever" class="flex items-center cursor-pointer">
-                  <i data-lucide="thermometer" class="h-4 w-4 mr-2"></i>
-                  Fever
-                </label>
-              </div>
-              <div class="flex items-center space-x-2">
-                <input
-                  type="checkbox"
-                  id="fever"
-                  class="form-checkbox h-4 w-4 text-blue-600"
-                />
-                <label for="fever" class="flex items-center cursor-pointer">
-                  <i data-lucide="thermometer" class="h-4 w-4 mr-2"></i>
-                  Fever
-                </label>
-              </div>
+              
+                <textarea
+                name="symptoms"
+                class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                rows="4"
+                placeholder="Describe any additional symptoms here..."
+                ></textarea>
+
+              <button
+                type="submit"
+                class="w-full md:w-auto bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+              >
+                Analyze Symptoms
+                <i data-lucide="arrow-right" class="ml-2 h-4 w-4"></i>
+              </button>
+            </form>
+
+            <!-- Display Analysis Result -->
+            {% if analysis_result %}
+            <div class="bg-white shadow rounded-lg p-6 mt-8">
+              <h2 class="text-xl font-bold mb-4">Analysis Results</h2>
+              <p class="text-gray-600">{{ analysis_result }}</p>
             </div>
-          </div>
-          <div class="px-6 py-4">
-            <button
-              class="w-full md:w-auto bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
-            >
-              Analyze Symptoms
-              <i data-lucide="arrow-right" class="ml-2 h-4 w-4"></i>
-            </button>
+            {% endif %}
           </div>
         </div>
 

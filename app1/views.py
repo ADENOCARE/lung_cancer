@@ -3,7 +3,7 @@ import base64
 from django.shortcuts import render, redirect
 from django.core.files.storage import FileSystemStorage
 from django.contrib import messages
-from decouple import config  # Import config from python-decouple
+from decouple import config
 import google.generativeai as genai
 
 # Configure Google Gemini API using the API key from the .env file
@@ -24,7 +24,12 @@ def analyze_image(image_path, prompt="Analyze this chest X-ray for lung cancer."
     ])
     return response.text
 
-from django.shortcuts import render
+def analyze_symptoms(symptoms):
+    """Sends a text-based prompt to Google Gemini API for symptom analysis."""
+    model = genai.GenerativeModel("gemini-1.5-flash")
+    prompt = f"Analyze the following symptoms and provide a diagnosis or recommendation: {', '.join(symptoms)}."
+    response = model.generate_content([{"text": prompt}])
+    return response.text
 
 def index(request):
     return render(request, 'app1/index.html')
@@ -33,7 +38,23 @@ def home(request):
     return render(request, 'app1/home.html')
 
 def symptom_checker(request):
-    return render(request, 'app1/symptom_checker.html')
+    if request.method == "POST":
+        # Get selected symptoms from the form
+        selected_symptoms = request.POST.getlist("symptoms")
+        
+        if not selected_symptoms:
+            messages.error(request, "Please select at least one symptom.")
+            return render(request, "app1/symptom_checker.html")
+
+        try:
+            # Use the Gemini API to analyze the symptoms
+            analysis_result = analyze_symptoms(selected_symptoms)
+            return render(request, "app1/symptom_checker.html", {"analysis_result": analysis_result})
+        except Exception as e:
+            messages.error(request, f"Error analyzing symptoms: {e}")
+            return redirect("symptom_checker")
+
+    return render(request, "app1/symptom_checker.html")
 
 def lung_analysis(request):
     if request.method == "POST" and request.FILES.get("xray"):
