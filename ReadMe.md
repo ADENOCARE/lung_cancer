@@ -44,7 +44,8 @@ Follow these steps to get an API key for the Google Generative AI (Gemini API):
 ---
 
 ### Example [.env](http://_vscodecontentref_/3) File
-```env
+
+
 GOOGLE_GENAI_API_KEY=your_api_key_here
 
 ---
